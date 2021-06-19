@@ -6,14 +6,14 @@ const { stripIndents } = require("common-tags");
 const { support } = require("../../config");
 
 module.exports = {
-config: {
+
     name: "info",
     description: "Help Menu",
     category: 'utility',
     usage: "1) !help \n2) !help [module name]\n3) !help [command (name or alias)]",
     example: "1) !help\n2) !help util\n3) !help ban",
-    aliases: ['h']
-},
+    aliases: ['h'],
+
 execute: async (client, message, args) => {
     let prefix;
     if (message.author.client || message.channel.type === "dm") return;
