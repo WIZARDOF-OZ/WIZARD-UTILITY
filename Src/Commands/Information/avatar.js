@@ -1,24 +1,42 @@
-const {Client , MessageEmbed} = require('discord.js');
-const client = new Client();
-
+const Discord = require("discord.js");
 
 module.exports = {
-name: "av",
-aliases: ['avatar'],
-category: "Information",
+   
+  name: "avatar",
+  aliases: ["av"],
+  description: "Display a user avatar",
+  usage: "avatar [@user | user ID]",
+  category: "Information",
+   
+ execute: async (client, message, args) => {
+  let user;
 
+if (message.mentions.users.first())
+ {
+user = message.mentions.users.first();
 
+} else if (args[0]) {
 
-execute: (client,message,args)=>{
-    let target =  message.mentions.members.first() || message.member;
-    if(!target) return message.author;
-   const avembed = new MessageEmbed()
-   .setTitle(`AVATAR OF ${target.user.tag}`)
-   .setColor(target.roles.highest.hexColor)
-   .setImage(target.user.displayAvatarURL({dynamic : true , size: 4096 ,format:"png"}))
-   .setFooter(`Command is used by ${message.author.tag}`,`${message.author.displayAvatarURL({dynamic:true})}`)
-   .setTimestamp()
-   message.channel.send(target.roles.highest.hexColor)
-    message.channel.send(avembed)
+user = message.guild.members.cache.get(args[0]).user;
+
+} else {
+user = message. author;
 }
+
+let target =  message.mentions.members.first() || message.member;
+if(!target) return message.author;
+
+let avatar = user.displayAvatarURL ({size: 4096, dynamic: true});
+
+const embed = new Discord.MessageEmbed()
+
+.setTitle(`${user.tag} avatar`)
+.setDescription(`[Avatar URL of ${user.tag}](${avatar})`) 
+.setColor(target.roles.highest.hexColor)
+.setImage(avatar);
+
+return message.channel.send(embed);
 }
+};
+
+//message.channel.send(target.roles.highest.hexColor)
