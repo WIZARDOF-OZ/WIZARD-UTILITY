@@ -18,7 +18,7 @@ const client = new DiscordJS.Client({
 
 
 const  db = require("old-wio.db");
-
+const fs = require("fs")
 
 client.distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true });
 const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
