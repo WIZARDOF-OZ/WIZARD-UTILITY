@@ -30,7 +30,7 @@ execute: async (client, message, args) => {
     
     try {
 
-    let Categories = ["admin", "fun", "images", "info", "mod", "utility"],
+    let Categories = ["Admin", "Fun","Information", "Moderation", "Music"],
     AllCommands = [];
 
 const Emotes = {
