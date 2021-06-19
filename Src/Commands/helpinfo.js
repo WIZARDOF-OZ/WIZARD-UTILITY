@@ -1,20 +1,19 @@
-  
 const Discord = require('discord.js')
 const fs = require("fs");
-
+const { PREFIX } = require("../../config.js");
 const db = require('old-wio.db');
 const { stripIndents } = require("common-tags");
-
+const { support } = require("../../config");
 
 module.exports = {
-
-    name: "helpinfo",
+config: {
+    name: "info",
     description: "Help Menu",
-    category: 'Information',
+    category: 'utility',
     usage: "1) !help \n2) !help [module name]\n3) !help [command (name or alias)]",
     example: "1) !help\n2) !help util\n3) !help ban",
-    aliases: ['h'],
-
+    aliases: ['h']
+},
 execute: async (client, message, args) => {
     let prefix;
     if (message.author.client || message.channel.type === "dm") return;
@@ -31,7 +30,7 @@ execute: async (client, message, args) => {
     
     try {
 
-    let Categories = ["Admin", "Fun", "Information", "Moderation", "Music", "Owner", "Suggestion", "Warning"],
+    let Categories = ["admin", "fun", "images", "info", "mod", "utility"],
     AllCommands = [];
 
 const Emotes = {
@@ -44,19 +43,19 @@ const Emotes = {
 };
 
 for (let i = 0; i < Categories.length; i++) {
-    const Cmds = await client.commands.filter(C => C.config.category === Categories[i]).array().map(C => C.config.name).sort((a, b) => a < b ? -1 : 1).join(", ");
+    const Cmds = await bot.commands.filter(C => C.config.category === Categories[i]).array().map(C => C.config.name).sort((a, b) => a < b ? -1 : 1).join(", ");
     AllCommands.push(`\n\n**${Emotes[Categories[i]]}**\n\`\`\`${Cmds}\`\`\``);
 };
 
-const Description = `My Prefix For **${message.guild.name}** Is **${prefix}**\n\nFor More Command Information, Type The Following Command:\n**${prefix}help <command Name> or** <@${client.user.id}> **help <command name>**`;
+const Description = `My Prefix For **${message.guild.name}** Is **${prefix}**\n\nFor More Command Information, Type The Following Command:\n**${prefix}help <command Name> or** <@${bot.user.id}> **help <command name>**`;
 
 const Embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setAuthor("Commands", message.author.avatarURL({
         dynamic: true
     }))
-    .setDescription(Description + AllCommands.join("") + "" + "\n\n" + "**Links -**" + ` [Join Support](${support}) • [Invite Me](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=client)`)
-    .setFooter(`Requested by ${message.author.username}`, client.user.displayAvatarURL())
+    .setDescription(Description + AllCommands.join("") + "" + "\n\n" + "**Links -**" + ` [Join Support](${support}) • [Invite Me](https://discordapp.com/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot)`)
+    .setFooter(`Requested by ${message.author.username}`, bot.user.displayAvatarURL())
     .setTimestamp();
 
 if (!args[0]) return message.channel.send(Embed);
