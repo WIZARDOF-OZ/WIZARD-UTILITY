@@ -3,7 +3,7 @@ const fs = require("fs");
 const { PREFIX } = require("../../config.js");
 const db = require('old-wio.db');
 const { stripIndents } = require("common-tags");
-const { support } = require("../../config");
+
 
 module.exports = {
 
