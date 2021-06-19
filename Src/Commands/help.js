@@ -4,7 +4,7 @@ const { MessageEmbed, Collection, Client, Message } = require('discord.js');
 
 
 module.exports = {
-    name: "help",
+    name: "helpinfo",
     cooldown: 3,
     memberPermissions: [],
     /**

@@ -1,22 +1,22 @@
 const Discord = require('discord.js')
 const fs = require("fs");
-const { PREFIX } = require("../../config.js");
+const { PREFIX } = require("../../config");
 const db = require('old-wio.db');
 const { stripIndents } = require("common-tags");
-
+const { support } = require("../../config");
 
 module.exports = {
-
-    name: "info",
+config: {
+    name: "help",
     description: "Help Menu",
     category: 'utility',
     usage: "1) !help \n2) !help [module name]\n3) !help [command (name or alias)]",
     example: "1) !help\n2) !help util\n3) !help ban",
-    aliases: ['h'],
-
-execute: async (client, message, args) => {
+    aliases: ['h']
+},
+execute: async (bot, message, args) => {
     let prefix;
-    if (message.author.client || message.channel.type === "dm") return;
+    if (message.author.bot || message.channel.type === "dm") return;
         try {
             let fetched = await db.fetch(`prefix_${message.guild.id}`);
             if (fetched == null) {
@@ -30,7 +30,7 @@ execute: async (client, message, args) => {
     
     try {
 
-    let Categories = ["Admin", "Fun","Information", "Moderation", "Music"],
+    let Categories = ["admin", "fun", "images", "info", "mod", "utility"],
     AllCommands = [];
 
 const Emotes = {
@@ -64,9 +64,9 @@ else {
     const embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL())
-    .setThumbnail(client.user.displayAvatarURL())
+    .setThumbnail(bot.user.displayAvatarURL())
 
-    let command = client.commands.get(client.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
+    let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
     if (!command) return message.channel.send(embed.setTitle("**Invalid Command!**").setDescription(`**Do \`${prefix}help\` For the List Of the Commands!**`))
     command = command.config
 
