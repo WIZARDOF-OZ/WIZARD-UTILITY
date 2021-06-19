@@ -1,20 +1,20 @@
 const Discord = require("discord.js");
 const db = require("old-wio.db");
 
-
+const support = `https://discord.gg/4395BzCTa7`
 
 module.exports = {
 
   name: "invite",
   aliases: ["invitelink"],
-  category: "Owner",
+  category: "Bot Dev",
   description: "Give You My Invite Link",
   usage: "invite",
   ownerOnly: true,
  
   execute: async (client, message, args) => {
     
-    const Invite = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`, Owne = `${Owner_Name}`, Dev = `Wizard`;
+    const Invite = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`, Owne = `Wizard`, Dev = `Wizard`;
     
     const Embed = new Discord.MessageEmbed()
     .setColor("RANDOM")

@@ -1,8 +1,12 @@
 const { MessageEmbed, Message, Client } = require('discord.js');
+const Discord = require('discord.js')
 const moment = require("moment");
 const ms = require("pretty-ms")
 const package = require("../../package.json");
 const fetch = require("node-fetch");
+const db = require("old-wio.db");
+const { version} = require('../../package.json')
+const { version: discordjsVersion } = require('discord.js');
 
 module.exports = {
     name: "info",
@@ -22,7 +26,9 @@ module.exports = {
             `Bot Uptime : ${uptime}`,
             `Version: v${instance.version}`,
             `Errors Detected: ${client.errors.size || "0"}`,
+            `Guild Count: ${client.guilds.cache.size}`,
             `Last Updated: ${moment(instance.lastUpdated).format("DD/MM/YYYY")}`
+            
         ]
 
         const processInfo = [
@@ -44,8 +50,27 @@ module.exports = {
             
         ]
 
+        message.channel.send(new Discord.MessageEmbed()
+            .setColor('RANDOM')
+            .setAuthor(`${client.user.username} v${version}`, client.user.displayAvatarURL())
+            .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+            .addField('❯ Uptime :', `${ms(client.uptime)}`, true)
+            .addField('❯ WebSocket Ping:', `${client.ws.ping}ms`, true)
+            .addField('❯ Memory:', `${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB RSS\n${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB Heap`, true)
+            .addField('❯ Guild Count:', `${client.guilds.cache.size} guilds`, true)
+            .addField(`❯ User Count:`, `${client.guilds.cache.reduce((users , value) => users + value.memberCount, 0)} users`, true)
+            .addField('❯ Commands:', `${client.commands.size} cmds`,true)
+            .addField('❯ Node:', `${process.version} on ${process.platform} ${process.arch}`, true)
+            .addField('❯ Cached Data:', `${client.users.cache.size} users\n${client.emojis.cache.size} emojis`, true)
+            .addField('❯ Discord.js:', `${discordjsVersion}`, true)
+            .setFooter(`Requested By ${message.author.username}`, message.author.displayAvatarURL({
+              dynamic: true
+            }))
+            .setTimestamp()
+        );
+
         const embed = new MessageEmbed()
-            .setAuthor(`${client.user.username}'s Information`, client.user.displayAvatarURL())
+            .setAuthor(`${client.user.username}'s Information v${discordjsVersion}`, client.user.displayAvatarURL())
             .addField(`General Information`, btf(generalInfo))
             .addField(`Process Information`, btf(processInfo))
             .addField(`API Status`, btf(externalStatus))
@@ -71,19 +96,6 @@ async function latency(uri) {
         return {
             status: false,
             latency: null
-        }
-    }
-}
-
-async function bsAPI() {
-    try {
-        const res = await fetch(`https://tke-general.screeneros.repl.co/api/profile/28RUYRRJG`).then(res => res.json())
-        return {
-            status: res.status
-        }
-    } catch (e) {
-        return {
-            status: false
         }
     }
 }
