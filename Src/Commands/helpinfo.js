@@ -34,12 +34,16 @@ execute: async (client, message, args) => {
     AllCommands = [];
 
 const Emotes = {
-    admin: "⚙️ Admin",
-    fun: "🙂 Fun",
-    images: "🔍 Images",
-    info: "📚 Info",
-    mod: "🔧 Mod",
-    utility: "🤖 Utility"
+    Admin: "⚙️ Admin",
+    Fun: "🙂 Fun",
+    Music: "🔍Music",
+    Information: "📚 Info",
+    Moderation: "🔧 Mod",
+    Owner: "🤖 Utility",
+    Levels: "🔧 Levels",
+    Giveaway: "🔧 Giveaways",
+    Suggestion: "🔧 Suggest",
+    Warning: "🔧 Warn"
 };
 
 for (let i = 0; i < Categories.length; i++) {
