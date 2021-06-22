@@ -8,7 +8,7 @@ module.exports = {
     name:"trigger",
     aliases: [],
     memberPermissions: [],
-    category: "Fun",
+    category: "Images",
 
     execute: async(client, message, args) => {
         

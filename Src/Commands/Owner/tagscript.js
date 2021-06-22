@@ -5,7 +5,7 @@ module.exports = {
     name: "tagscript",
     aliases: ["tsc"],
     cooldown: 0,
-    category: "Bot Dev",
+    category: "BotDev",
     ownerOnly: true,
     execute: async (client, message, args, text, instance) => {
         if(!args[0])return message.channel.send("Please provide some content.")

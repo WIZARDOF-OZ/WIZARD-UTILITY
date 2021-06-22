@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: "recache",
     aliases: ["rc"],
-    category:"Bot Dev",
+    category:"BotDev",
     ownerOnly: true,
     execute: async (client, message, args, text, instance) => {
         await message.guild.members.fetch();

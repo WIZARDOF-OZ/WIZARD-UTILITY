@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
 name:"eval",
-category:"Bot Dev",
+category:"BotDev",
 ownerOnly:true,
 execute: async(client, message, args, text , instance) => {
 

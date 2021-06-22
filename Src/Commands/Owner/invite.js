@@ -7,7 +7,7 @@ module.exports = {
 
   name: "invite",
   aliases: ["invitelink"],
-  category: "Bot Dev",
+  category: "BotDev",
   description: "Give You My Invite Link",
   usage: "invite",
   ownerOnly: true,

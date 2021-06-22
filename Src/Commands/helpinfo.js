@@ -34,16 +34,17 @@ execute: async (client, message, args) => {
     try {
       
    
-        let Categories = ["Admin", "Fun", "Bot Dev", "Information", "Moderation", "Music", "Levelling", "Giveaway", "Suggestion", "Warning"],
+        let Categories = ["Admin", "Fun", "Images", "BotDev", "Information", "Moderation", "Music", "Levelling", "Giveaway", "Suggestion", "Warning"],
         AllCommands = [];
     
     const Emotes = {
         Admin: "⚙️Admin",
         Fun: "🙂Fun",
+        Images: "🎨 Images",
         Music: "🔍Music",
         Information: "📚Info",
         Moderation: "🔧Mod",
-        BotDev: "🤖Bot Dev",
+        BotDev: "🤖BotDev",
         Levelling: "🔧Levelling",
         Giveaway: "🔧Giveaways",
         Suggestion: "🔧Suggest",

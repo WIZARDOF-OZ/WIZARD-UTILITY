@@ -4,7 +4,7 @@ const canvacord = require("canvacord");
 
 module.exports = {
     name: "shit",
-    category: "Fun",
+    category: "Images",
 
     execute: async(clinet, message, args) => {
         let target = message.mentions.users.first();

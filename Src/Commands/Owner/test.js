@@ -6,7 +6,7 @@ module.exports = {
     cooldown: 0,
     memberPermissions: [],
     ownerOnly : true,
-    category: "Bot Dev",
+    category: "BotDev",
     /**
      * 
      * @param {Message} message 

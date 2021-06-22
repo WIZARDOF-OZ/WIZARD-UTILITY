@@ -2,7 +2,7 @@ module.exports = {
     name: 'stealembed',
     aliases: ['se'],
     usage: '<message link>',
-    category:"Bot Dev",
+    category:"BotDev",
     ownerOnly: true,
   
     execute: async (client, message, args, text, instance) => {

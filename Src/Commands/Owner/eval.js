@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['evaluate'],
     description: 'To evaluate something.',
     usage: "<content>",
-    category: "Bot Dev",
+    category: "BotDev",
     ownerOnly: true,
     execute: async (client, message, args, text, instance) => {
         if (!text) return;

@@ -1,7 +1,7 @@
 const { Client, Message, MessageEmbed } = require("discord.js");
 const moment = require("moment");
 const config = require("../../config");
-
+const { readdir, readdirSync } = require("fs");
 /**
  * @param {Client} client 
  * @param {Message} message
@@ -10,6 +10,7 @@ const config = require("../../config");
 let cooldown = new Set();
 module.exports = (client) => {
 
+  
     let instance = {
         owners: config.owners,
         dev: config.dev,

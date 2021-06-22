@@ -34,6 +34,7 @@
     "erela.js": "^2.3.3",
     "express": "^4.17.1",
     "ffmpeg-static": "^4.3.0",
+    "figlet": "^1.5.0",
     "fs": "0.0.1-security",
     "is-hexcolor": "^1.0.0",
     "is-standard-emoji": "^1.0.0",

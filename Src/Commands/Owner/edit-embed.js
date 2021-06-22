@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'editembed',
     aliases: ['e-embed', 'ee'],
-    category:"Bot Dev",
+    category:"BotDev",
     usage: '<my msg link> <other msg link>',
     ownerOnly: true,
 
