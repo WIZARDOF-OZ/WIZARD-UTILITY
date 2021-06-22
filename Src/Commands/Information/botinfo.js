@@ -10,7 +10,7 @@ const { version } = require("../../../package.json")
 
 
 module.exports = {
-    name:"botinfo",
+    name:"ping",
     cooldown:0,
     aliases: ["bot"],
     category: "Information",
