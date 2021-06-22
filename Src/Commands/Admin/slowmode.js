@@ -2,13 +2,13 @@ const { MessageEmbed} = require('discord.js');
 
 const ms = require('ms');
 module.exports = {
-    
+
           name: "slowmode",
           category: 'Admin',
           description: "Set the slowmode for the channel!",
           memberPermissions: ['MANAGE_CHANNELS','ADMINISTATOR'],
           aliases: ['sm'],
-    
+  
   execute: async (client, message, args) => {
   
     if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.channel.send('You do not have **MANAGE_CHANNELS** permission!').then(m => m.delete({ timeout: 5000 }));

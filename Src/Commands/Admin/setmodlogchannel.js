@@ -7,7 +7,7 @@ module.exports = {
         aliases: ['setm', 'sm', 'smc', 'setmodlog'],
         description: "Sets A Channel Where The Bot Can Send Moderation Logs!",
         usage: "[channel mention | channel ID | channel name]",
-    
+
     execute: async (client, message, args) => {
         if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("**You Do Not Have The Required Permissions! - [ADMINISTRATOR]**")
     if (!args[0]) {

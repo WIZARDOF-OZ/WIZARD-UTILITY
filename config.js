@@ -1,12 +1,13 @@
 module.exports = {
     token: process.env.TOKEN,
     mongoDB: process.env.MONGO_DB,
-    prefix: ".",
+    prefix: "&",
     version: "2.0.4",
     lastUpdated: "2021-05-06T17:31:38.390Z",
     commandDir: "./Src/Commands",
     featuresDir: "./Src/Features",
     owners: ['583666642010112000'],
+    supportsrv:`https://discord.gg/4395BzCTa7`,
     dev: {
         enabled: false,
         guild: '810199045036441681',

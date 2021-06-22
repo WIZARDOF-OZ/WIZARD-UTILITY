@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const db = require("old-wio.db");
 
-const support = `https://discord.gg/4395BzCTa7`
+const { support }  = require("../../../JSON/Invite_Config.json")
 
 module.exports = {
 

@@ -1,3 +1,5 @@
+
+
 const express = require('express')
 const app = express();
 const port = 3000;
@@ -15,6 +17,7 @@ const config = require("./config"),
     DiscordJS = require("discord.js"),
     mongoose = require("mongoose"),
     DisTube = require('distube');
+
    
    
   
@@ -28,9 +31,10 @@ const client = new DiscordJS.Client({
     
 });
 
-
+const { PREFIX } = require("./config.js")
 const  db = require("old-wio.db");
 const fs = require("fs");
+
 
 client.distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true });
 const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
@@ -65,6 +69,8 @@ async function load() {
 
     client.on("ready", () => {
         console.log(chalk.green("API > Connected"))
+      
+
 
         const functions = loadFunctions(client);
         if (functions) {
@@ -102,12 +108,6 @@ async function load() {
     });
 }
 
-client.on("message", (message) => {
-    if((message.content === "<@816960110735392798>") || (message.content === "<@!816960110735392798>"))
-    {
-      message.channel.send(`My Prefix is \`\`${config.prefix}\`\``)
-    };
-})
 
 
 load();
@@ -115,5 +115,66 @@ load();
 if (config.dev.debug) {
     createTable(client.commands)
 }
+
+client.on("ready" , () => {
+    console.log(chalk.red(`${client.user.tag} is ready`))
+})
+client.on("message" , async message => {
+    
+    if (message.author.bot || !message.guild || message.webhookID) return;
+    
+    let PREFIX = await db.fetch(`prefix_${message.guild.id}`);
+ 
+  
+  const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
+       
+    if (message.content.match(mentionRegex)) {
+      message.channel.send(
+        new DiscordJS.MessageEmbed()
+        .setThumbnail(`${message.author.displayAvatarURL({ dynamic: true })}`)
+        .setDescription(`Hey <@${message.author.id}>, My prefix for this guild is \`\`\`${PREFIX}\`\`\`.Use \`\`\`${PREFIX}help\`\`\` or <@${client.user.id}> help to get a list of commands`)
+         .setColor("RANDOM")
+         .setFooter(`Requested by ${message.author.username}`)
+         .setTimestamp()
+)}
+
+
+
+if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
+    const info = db.fetch(`afk-${message.author.id}+${message.guild.id}`)
+    await db.delete(`afk-${message.author.id}+${message.guild.id}`)
+    await db.delete(`aftime-${message.author.id}+${message.guild.id}`)
+    message.channel.send(`Welcome back ${message.author.username}, Great to see you!!`)
+}
+//checking for mentions
+if(message.mentions.members.first()) {
+    if(db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
+      const reason = db.fetch(`afk-${message.mentions.members.first().id}+${message.guild.id}`);
+      let time = db.fetch(`aftime-${message.mentions.members.first().id}+${message.guild.id}`);
+            time = Date.now() - time;
+       return message.channel.send(`**${message.mentions.members.first().user.username} is now afk - ${reason} - ${format(
+                    time
+                )} ago**`);
+    }
+}
+
+const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(PREFIX)})\\s*`);
+
+    if(!prefixRegex.test(message.content)) return;
+
+    const [, matchedPrefix] = message.content.match(prefixRegex);
+     Prefix = matchedPrefix;
+
+    
+    if(!message.content.startsWith(Prefix)) return;
+    
+     if (!message.guild.me.permissionsIn(message.channel).has("EMBED_LINKS"))
+        return message.reply("**:x: I am missing the Permission to `EMBED_LINKS`**");
+})
+
+
+
+
 
 client.login(config.token)
