@@ -90,7 +90,7 @@ async function load() {
 
 
 load();
-
+require("./distube-handler")(client);
 if (config.dev.debug) {
     createTable(client.commands)
 }
