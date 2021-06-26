@@ -81,7 +81,9 @@ else {
     .setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL())
     .setThumbnail(client.user.displayAvatarURL())
 
-    let command = client.commands.get(client.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
+    const commandfile =
+    client.commands.get(args[0].slice(client.prefix.length)) ||
+    client.commands.get(client.aliases.get(args[0].slice(client.prefix.length)));
     if (!command) return message.channel.send(embed.setTitle("**Invalid Command!**").setDescription(`**Do \`${PREFIX}help\` For the List Of the Commands!**`))
     command = command.config
 

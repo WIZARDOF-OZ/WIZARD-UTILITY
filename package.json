@@ -15,7 +15,7 @@
     "@discordjs/opus": "^0.5.3",
     "@vitalets/google-translate-api": "^7.0.0",
     "axios": "^0.21.1",
-    "canvacord": "^5.2.0",
+    "canvacord": "^5.2.1",
     "chalk": "^4.1.1",
     "chartjs-to-image": "^1.0.4",
     "color-convert": "^2.0.1",
@@ -33,7 +33,7 @@
     "dotenv": "^9.0.2",
     "erela.js": "^2.3.3",
     "express": "^4.17.1",
-    "ffmpeg-static": "^4.3.0",
+    "ffmpeg-static": "^4.4.0",
     "figlet": "^1.5.0",
     "fs": "0.0.1-security",
     "is-hexcolor": "^1.0.0",
@@ -42,7 +42,7 @@
     "mathjs": "^9.4.2",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.12.10",
+    "mongoose": "^5.12.14",
     "ms": "^2.1.3",
     "nanoid": "^3.1.23",
     "newsapi": "^2.4.1",
@@ -56,11 +56,13 @@
     "quick-db": "^1.0.5",
     "slashdiscord.js": "^1.0.11",
     "slashy": "^1.0.8",
-    "sourcebin": "^4.2.3",
+    "sourcebin": "^4.2.5",
+    "spotify-url-info": "^2.2.3",
     "string-progress": "^1.8.9",
     "table": "^6.7.1",
     "tag-replacer": "^1.2.4",
     "transliteration": "^2.2.0",
-    "wikipedia": "^1.1.1"
+    "wikipedia": "^1.1.1",
+    "ytdl-core": "github:distubejs/node-ytdl-core"
   }
 }

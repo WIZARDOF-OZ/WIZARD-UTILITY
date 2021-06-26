@@ -1,24 +1,14 @@
+  
 const { MessageEmbed } = require("discord.js");
-const config = require("../../../config.js");
+const config = require("../../../config.js")
 const ee = require("../../../JSON/embed_Config.json");
 module.exports = {
-    name: "pause",
+    name: "shuffle",
     category: "Music",
-    aliases: [""],
+    aliases: ["mix"],
     cooldown: 4,
-    useage: "pause",
-    description: "Pauses the Music",
-
-    /**
-     * 
-     * @param {*} client 
-     * @param {*} message 
-     * @param {*} args 
-     * @param {*} cmduser 
-     * @param {*} text 
-     * @param {*} prefix 
-     * @returns 
-     */
+    useage: "shuffle",
+    description: "Shuffles the Queue",
     execute: async (client, message, args, cmduser, text, prefix) => {
     try{
       const { channel } = message.member.voice; // { message: { member: { voice: { channel: { name: "Allgemein", members: [{user: {"username"}, {user: {"username"}] }}}}}
@@ -42,20 +32,14 @@ module.exports = {
           .setTitle(`❌ ERROR | Please join **my** Channel first`)
           .setDescription(`Channelname: \`${message.guild.me.voice.channel.name}\``)
         );
-      if(client.distube.isPaused(message))
-        return message.channel.send(new MessageEmbed()
-          .setColor(ee.wrongcolor)
-          .setFooter(ee.footertext, ee.footericon)
-          .setTitle(`❌ ERROR | Cannot pause the Song`)
-          .setDescription(`It's already paused, so I cant!`)
-        );
+
       message.channel.send(new MessageEmbed()
         .setColor(ee.color)
         .setFooter(ee.footertext,ee.footericon)
-        .setTitle("⏸ Paused the Song")
-      ).catch(e=>console.log(e.message))
+        .setTitle("🔀 Shuffled the Queue")
+      ).then(msg=>msg.delete({timeout: 4000}).catch(e=>console.log(e.message)))
 
-      client.distube.pause(message);
+      client.distube.shuffle(message);
     } catch (e) {
         console.log(String(e.stack).bgRed)
         return message.channel.send(new MessageEmbed()

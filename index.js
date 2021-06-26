@@ -13,55 +13,34 @@ console.log(chalk.cyan(`Your app is listening a http://localhost:${port}`))
 
 
 require("dotenv").config();
-const config = require("./config"),
-    DiscordJS = require("discord.js"),
+
+    const DiscordJS = require("discord.js"),
     mongoose = require("mongoose"),
     DisTube = require('distube');
-
-   
-   
-  
     getFiles = require("./Src/Functions/Base/getFiles"),
     chalk = require("chalk"),
     createTable = require("./Src/Functions/Base/createTable"),
     loadFunctions = require('./Src/Functions');
 
 const client = new DiscordJS.Client({
+    messageCacheLifetime: 60,
+  fetchAllMembers: false,
+  messageCacheMaxSize: 10,
+  restTimeOffset: 0,
+  restWsBridgetimeout: 100,
+  disableEveryone: true,
     partials: ['CHANNEL', 'MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER']
     
 });
 
+const { format } = require("./function.js")
 const { PREFIX } = require("./config.js")
+const config = require("./config.js");
 const  db = require("old-wio.db");
 const fs = require("fs");
 
+  
 
-client.distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true });
-const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
-client.distube
-    .on("playSong", (message, queue, song) => message.channel.send(
-        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}\n ${status(queue)}`
-	))
-	.on("addSong", (message, queue, song) => message.channel.send(
-        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}\n ${status(queue)}`
-    ))
-    .on("addList", (message, queue, playlist) => message.channel.send(
-        `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`
-    ))
-    .on("playList", (message, queue, playlist, song) => message.channel.send(
-        `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`
-    ))
-
-
-    .on("searchResult", (message, result) => {
-        let i = 0;
-        message.channel.send(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`);
-    })
-    .on("searchCancel", (message) => message.channel.send(`Searching canceled`))
-    .on("error", (message, e) => {
-        console.error(e)
-        message.channel.send("An error encountered: " + e);
-    });
 client.commands = new DiscordJS.Collection();
 client.events = 0;
 
@@ -120,6 +99,7 @@ client.on("ready" , () => {
     console.log(chalk.red(`${client.user.tag} is ready`))
 })
 client.on("message" , async message => {
+ 
     
     if (message.author.bot || !message.guild || message.webhookID) return;
     

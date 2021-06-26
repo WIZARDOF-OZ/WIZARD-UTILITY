@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client()
 
 module.exports = {
-    name:"join",
-    aliases:["connect"],
+    name:"connect",
+    aliases:["join"],
     description:"Join the voice channel",
     category:"Music",
 

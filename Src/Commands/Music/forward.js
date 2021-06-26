@@ -1,24 +1,14 @@
 const { MessageEmbed } = require("discord.js");
 const config = require("../../../config.js");
 const ee = require("../../../JSON/embed_Config.json");
+const { format } = require("../../../function.js")
 module.exports = {
-    name: "pause",
+    name: "forward",
     category: "Music",
-    aliases: [""],
+    aliases: ["fwd"],
     cooldown: 4,
-    useage: "pause",
-    description: "Pauses the Music",
-
-    /**
-     * 
-     * @param {*} client 
-     * @param {*} message 
-     * @param {*} args 
-     * @param {*} cmduser 
-     * @param {*} text 
-     * @param {*} prefix 
-     * @returns 
-     */
+    useage: "forward <Time in Seconds>",
+    description: "Forwards for a specific amount of Time",
     execute: async (client, message, args, cmduser, text, prefix) => {
     try{
       const { channel } = message.member.voice; // { message: { member: { voice: { channel: { name: "Allgemein", members: [{user: {"username"}, {user: {"username"}] }}}}}
@@ -42,20 +32,28 @@ module.exports = {
           .setTitle(`❌ ERROR | Please join **my** Channel first`)
           .setDescription(`Channelname: \`${message.guild.me.voice.channel.name}\``)
         );
-      if(client.distube.isPaused(message))
+      if(!args[0])
         return message.channel.send(new MessageEmbed()
           .setColor(ee.wrongcolor)
           .setFooter(ee.footertext, ee.footericon)
-          .setTitle(`❌ ERROR | Cannot pause the Song`)
-          .setDescription(`It's already paused, so I cant!`)
-        );
-      message.channel.send(new MessageEmbed()
-        .setColor(ee.color)
-        .setFooter(ee.footertext,ee.footericon)
-        .setTitle("⏸ Paused the Song")
-      ).catch(e=>console.log(e.message))
+          .setTitle(`❌ ERROR | You didn't provided a Time you want to seek to!`)
+          .setDescription(`Usage: \`${prefix}seek 10\``)
+        )
 
-      client.distube.pause(message);
+      let queue = client.distube.getQueue(message);
+      let seektime = queue.currentTime + Number(args[0]) * 1000;
+      if(seektime < 0)
+        seektime = queue.songs[0].duration * 1000;
+      if(seektime >= queue.songs[0].duration * 1000)
+        seektime = queue.songs[0].duration * 1000 - 1000;
+
+      client.distube.seek(message, seektime);
+
+      message.channel.send(new MessageEmbed()
+        .setColor(ee.Green)
+        .setFooter(ee.footertext,ee.footericon)
+        .setTitle(`⏩ Forwarded for \`${args[0]} Seconds\` to: ${format(seektime)}`)
+      ).catch(e=>console.log(e.message))
     } catch (e) {
         console.log(String(e.stack).bgRed)
         return message.channel.send(new MessageEmbed()

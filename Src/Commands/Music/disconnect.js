@@ -2,12 +2,12 @@ const Discord = require('discord.js');
 const client = new Discord.Client()
 
 module.exports = {
-    name:"leave",
-    aliases:["disconnect"],
+    name:"disconnect",
+    aliases:["leave"],
     description:"Leave the voice channel",
     category:"Music",
 
-    execute: async(client, message, args) => {
+    execute: async(client, message, args, text, instance) => {
         if(!message.member.voice.channel) return message.channel.send('You must be in a voice channel to use this command.');
 
 
@@ -17,7 +17,7 @@ module.exports = {
         if(message.guild.me.permissions.toArray().includes('ADD_REACTION')){
 
             try{
-                message.react('🎙')
+                message.react('🎙️')
             }
             catch(err){
                 console.log(err);
