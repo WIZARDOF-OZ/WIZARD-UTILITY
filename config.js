@@ -9,7 +9,7 @@ module.exports = {
     functionDir: "./Src/Features",
     owners: ['583666642010112000'],
     supportsrv:`https://discord.gg/4395BzCTa7`,
-      
+    AME_API:"729fc644a38423c4a6d4a3c3ae24d1a8d73055ff4e4cefc97ed0ce6b2fdcd37ab8325fe50192ff1b094a8805604b1b4cd7830cebc4dd9d413ac469df381d4a05",
 
     
     dev: {
