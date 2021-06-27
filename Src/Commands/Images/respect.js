@@ -10,7 +10,7 @@ module.exports = {
         description: 'Editing image and send respect one!',
         aliases: [""],
         usage: '',
-        category: 'images',
+        category: 'Images',
 
     execute: async (client, message, args) => {
     
