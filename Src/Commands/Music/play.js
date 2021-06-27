@@ -37,7 +37,7 @@ module.exports = {
           .setColor(ee.color)
           .setFooter(ee.footertext,ee.footericon)
           .setTitle("Searching Song")
-          .setDescription(`\`\`\`fix\n${text}\n\`\`\``)
+          .setDescription(`\`\`\`fix\n${args.join(" ")}\n\`\`\``) 
         ).then(msg=>msg.delete({timeout: 3000}).catch(e=>console.log(e.message)))
         //https://open.spotify.com/track/5nTtCOCds6I0PHMNtqelas
         if(args.join(" ").toLowerCase().includes("spotify") && args.join(" ").toLowerCase().includes("track")){
