@@ -21,7 +21,7 @@ module.exports = (client, def) => {
             const bye = new MessageEmbed()
                 .setAuthor(' SUPPORT TEAM', config.icon)
                 .addField('The support has been closed!', 'Message again to open a new support session.')
-                .setFooter('Thank You for contacting us :)')
+                .setFooter('Thank You for contacting us :)',msg.guild.iconURL({dynamic: true}))
                 .setColor('RED')
                 .setTimestamp();
             tUser.send(bye).catch(e => {
@@ -42,9 +42,9 @@ function formEmbed(msg) {
     let embeds = [];
     const embed = new MessageEmbed()
         .setDescription(msg.content || "Attachment")
-        .setAuthor(`SUPPORT TEAM`, msg.guild.iconURL({ dynamic: true }))
+        .setAuthor(`${msg.author.tag}`,`${msg.author.displayAvatarURL({dynamic: true})}`)
         .setColor("GREEN")
-        .setFooter(`#Stay#Safe`)
+        .setFooter(`SUPPORT TEAM`,msg.guild.iconURL({ dynamic: true }))
         .setTimestamp(msg.createdTimestamp);
     if (msg.attachments.array().length <= 1) {
         if (msg.attachments.array().length !== 0) embed.setImage(msg.attachments.first().proxyURL);
@@ -53,9 +53,10 @@ function formEmbed(msg) {
     if (msg.attachments.array().length > 1) {
         msg.attachments.array().forEach(atch => {
             const embed2 = new MessageEmbed()
-                .setAuthor(`SUPPORT TEAM`, msg.guild.iconURL({ dynamic: true }))
+                .setAuthor(`${msg.author.tag}`,`${msg.author.displayAvatarURL({dynamic: true})}` )
+                
                 .setColor("GREEN")
-                .setFooter(`#staySafe`)
+                .setFooter(`SUPPORT TEAM`,msg.guild.iconURL({ dynamic: true }))
                 .setTimestamp(msg.createdTimestamp)
                 .setImage(atch.proxyURL);
             embeds.push(embed2)

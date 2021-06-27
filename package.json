@@ -27,6 +27,7 @@
     "colornames": "^1.1.1",
     "common-tags": "^1.8.0",
     "discord-giveaway": "^1.1.4",
+    "discord-image-generation": "^1.4.9",
     "discord-inv": "^1.1.0",
     "discord-logs": "^1.9.0",
     "discord-paginationembed": "^2.1.0",
@@ -52,6 +53,7 @@
     "newsapi": "^2.4.1",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1",
+    "node-superfetch": "^0.2.3",
     "nodemon": "^2.0.7",
     "old-wio.db": "^4.0.10",
     "parse-duration": "^1.0.0",
@@ -62,10 +64,12 @@
     "slashy": "^1.0.8",
     "sourcebin": "^4.2.5",
     "spotify-url-info": "^2.2.3",
+    "srod-v2": "^1.0.2",
     "string-progress": "^1.8.9",
     "table": "^6.7.1",
     "tag-replacer": "^1.2.4",
     "transliteration": "^2.2.0",
+    "weather-js": "^2.0.0",
     "wikipedia": "^1.1.1",
     "ytdl-core": "github:distubejs/node-ytdl-core"
   }
