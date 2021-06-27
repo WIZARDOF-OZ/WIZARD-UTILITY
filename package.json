@@ -13,6 +13,10 @@
     "ws": ">=7.4.6",
     "set-getter": ">=0.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WIZARDOF-OZ/WIZARD-UTILITY.git"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
