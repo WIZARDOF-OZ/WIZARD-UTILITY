@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const { MessageEmbed } = require("discord.js")
 const fs = require("fs");
 const config = require("../../config.js");
 const { PREFIX, prefix } =  require("../../config.js")
@@ -17,6 +18,7 @@ module.exports = {
     aliases: ['h'],
 
 execute: async (client, message, args) => {
+  
     const WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ = await client.users.cache.get("583666642010112000");
     const { author, channel } = message;
     let commands = message.client.commands.array();
@@ -44,7 +46,7 @@ execute: async (client, message, args) => {
         Music: "🔍Music",
         Information: "📚Info",
         Moderation: "🔧Mod",
-        BotDev: "🤖BotDev",
+        BotDev: "🤖Bot Dev",
         Levelling: "🔧Levelling",
         Giveaway: "🔧Giveaways",
         Suggestion: "🔧Suggest",
@@ -63,7 +65,7 @@ let catList = []
     
   
 
-const Description = `My Prefix For **${message.guild.name}** Is **${PREFIX}**\n\nFor More Command Information, Type The Following Command:\n**${prefix}help <command Name> or** <@${client.user.id}> **help <command name>**`;
+const Description = `My Prefix For **${message.guild.name}** Is **${prefix}**\n\nFor More Command Information, Type The Following Command:\n**${prefix}help <command Name> or** <@${client.user.id}> **help <command name>**`;
 
 const Embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
@@ -81,11 +83,11 @@ else {
     .setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL())
     .setThumbnail(client.user.displayAvatarURL())
 
-    const commandfile =
-    client.commands.get(args[0].slice(client.prefix.length)) ||
-    client.commands.get(client.aliases.get(args[0].slice(client.prefix.length)));
-    if (!command) return message.channel.send(embed.setTitle("**Invalid Command!**").setDescription(`**Do \`${PREFIX}help\` For the List Of the Commands!**`))
-    command = command.config
+    const command = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
+    if (!command) {
+        return message.channel.send(embed.setColor(`RED`).setDescription(`No Information found for command **${args[0].toLowerCase()}**`));
+    }
+    
 
     embed.setDescription(stripIndents`
     ** Command -** \`${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}\`\n
@@ -98,7 +100,14 @@ else {
     return message.channel.send(embed)
 };
 } catch (e) {
-  console.log(e);
+  console.log(e)
+  message.channel.send(new MessageEmbed()
+  .setColor(`RED`)
+  .setFooter(`ONE ERROR OCCURED AT`)
+  .setTimestamp()
+  .setTitle(`❌ ERROR | An error occurred`)
+  .setDescription(`\`\`\`${e.stack}\`\`\``)
+);
 };
 
     

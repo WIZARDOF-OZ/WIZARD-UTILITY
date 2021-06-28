@@ -3,7 +3,7 @@ const client = new Discord.Client()
 
 module.exports = {
     name:"disconnect",
-    aliases:["leave"],
+    aliases:["leave","dc"],
     description:"Leave the voice channel",
     category:"Music",
 

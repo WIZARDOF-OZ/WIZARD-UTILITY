@@ -11,10 +11,17 @@ function loadStatus(client) {
             "status": "idle",
             "activity": {
                 "name": "Anime",
-                "type": "LISTENING"
+                "type": "WATCHING"
             }
         },
         {
+            "status": "idle",
+            "activity": {
+                "name": "TO MY DEV:Dev:WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ#4090 ",
+                "type": "LISTENING"
+            }
+        },
+         {
             "status": "online",
             "activity": {
                 "name": "Dm me for help!",
