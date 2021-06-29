@@ -2,6 +2,7 @@ const { Client, Message, MessageEmbed } = require("discord.js");
 const moment = require("moment");
 const config = require("../../config");
 const { readdir, readdirSync } = require("fs");
+const { runInContext } = require("vm");
 /**
  * @param {Client} client 
  * @param {Message} message
@@ -50,7 +51,8 @@ module.exports = (client) => {
             memberPermissions: cmd.memberPermissions || [],
             ownerOnly: cmd.ownerOnly || false,
             cooldown: cmd.cooldown || 0,
-            execute: cmd.execute
+            execute: cmd.execute,
+            run: cmd.run
         }
         const onDevMode = new MessageEmbed()
             .setColor(config.color.error)

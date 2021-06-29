@@ -21,7 +21,7 @@ module.exports = (client, def) => {
             const bye = new MessageEmbed()
                 .setAuthor(' SUPPORT TEAM', config.icon)
                 .addField('The support has been closed!', 'Message again to open a new support session.')
-                .setFooter('Thank You for contacting us :)',msg.guild.iconURL({dynamic: true}))
+                .setFooter('Thank You for contacting us :)')
                 .setColor('RED')
                 .setTimestamp();
             tUser.send(bye).catch(e => {

@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 0,
     category: "Moderation",
     memberPermissions: ['MANAGE_MESSAGES', 'MANAGE_ROLES', 'MANAGE_NICKNAMES'],
-    usage: '<@mention | id> [nickname]',
+ usage: '<@mention | id> [nickname]',
     description: 'Used to decancer someone\'s nickname.',
     execute: async (client, message, args, text, instance) => {
         const { guild, member, mentions, channel } = message;

@@ -11,7 +11,7 @@ module.exports = {
     cooldown: 4,
     useage: "autoplay",
     description: "Toggles Autoplay",
-    run: async (client, message, args, cmduser, text, prefix) => {
+    execute: async (client, message, args, cmduser, text, prefix) => {
     try{
       const { channel } = message.member.voice; // { message: { member: { voice: { channel: { name: "Allgemein", members: [{user: {"username"}, {user: {"username"}] }}}}}
       if(!channel)
