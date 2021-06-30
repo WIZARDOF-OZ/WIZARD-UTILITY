@@ -1,6 +1,5 @@
 {
     "discord.suppressNotifications": true,
     "editor.wordWrap": "on",
-    "editor.mouseWheelZoom": true,
-    "discord.idleTimeout": 5
+    "editor.mouseWheelZoom": true
 }
