@@ -22,6 +22,16 @@ require("dotenv").config();
     createTable = require("./Src/Functions/Base/createTable"),
     loadFunctions = require('./Src/Functions');
 
+    const bot = new DiscordJS.Client({
+        messageCacheLifetime: 60,
+      fetchAllMembers: false,
+      messageCacheMaxSize: 10,
+      restTimeOffset: 0,
+      restWsBridgetimeout: 100,
+      disableEveryone: true,
+        partials: ['CHANNEL', 'MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER']
+        
+    });
 const client = new DiscordJS.Client({
     messageCacheLifetime: 60,
   fetchAllMembers: false,
@@ -34,10 +44,16 @@ const client = new DiscordJS.Client({
 });
 
 const { format } = require("./function.js")
-const { PREFIX } = require("./config.js")
+const { PREFIX , prefix } = require("./config.js")
 const config = require("./config.js");
+const wb = require("quick.db")
 const  db = require("old-wio.db");
 const fs = require("fs");
+const Enmap = require("enmap");
+client.queue2 = new Map();
+client.queue3 = new Map();
+client.queue = new Map();
+client.games = new Map();
 
   
 
@@ -117,14 +133,10 @@ client.on("message" , async message => {
          .setFooter(`Requested by ${message.author.username}`)
          .setTimestamp()
 )}
-
-
-
 if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
-    const info = db.fetch(`afk-${message.author.id}+${message.guild.id}`)
+    const info = db.get(`afk-${message.author.id}+${message.guild.id}`)
     await db.delete(`afk-${message.author.id}+${message.guild.id}`)
-    await db.delete(`aftime-${message.author.id}+${message.guild.id}`)
-    message.channel.send(`Welcome back ${message.author.username}, Great to see you!!`)
+    message.reply(`Your afk status have been removed (${info})`)
 }
 //checking for mentions
 if(message.mentions.members.first()) {
@@ -146,11 +158,60 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const [, matchedPrefix] = message.content.match(prefixRegex);
      Prefix = matchedPrefix;
 
+
     
-    if(!message.content.startsWith(Prefix)) return;
+    if(!message.content.startsWith(prefix)) return;
     
      if (!message.guild.me.permissionsIn(message.channel).has("EMBED_LINKS"))
         return message.reply("**:x: I am missing the Permission to `EMBED_LINKS`**");
+  
+        let args = message.content
+        .slice(matchedPrefix.length)
+        .trim()
+        .split(/ +/g);
+      let cmd = args.shift().toLowerCase();
+      
+      if (cmd.length === 0) return;
+    
+      let cmdx = wb.fetch(`cmd_${message.guild.id}`)
+    
+      if (cmdx) {
+        let cmdy = cmdx.find(x => x.name === cmd)
+        if (cmdy) message.channel.send(cmdy.responce.replace(/{user}/g, `${message.author}`)
+    
+         .replace(/{user_tag}/g, `${message.author.tag}`)
+            .replace(/{user_name}/g, `${message.author.username}`)
+            .replace(/{user_ID}/g, `${message.author.id}`)
+            .replace(/{guild_name}/g, `${message.guild.name}`)
+            .replace(/{guild_ID}/g, `${message.guild.id}`)
+            .replace(/{memberCount}/g, `${message.guild.memberCount}`)
+            .replace(/{size}/g, `${message.guild.memberCount}`)
+            .replace(/{guild}/g, `${message.guild.name}`)
+            .replace(/{member_createdAtAgo}/g, `${moment(message.author.createdTimestamp).fromNow()}`)
+            .replace(/{member_createdAt}/g, `${moment(message.author.createdAt).format('MMMM Do YYYY, h:mm:ss a')}`)
+      )};
+      
+      let ops = {
+                queue2: bot.queue2,
+                queue: bot.queue,
+                queue3: bot.queue3,
+                games: bot.games
+            }
+    
+      let command =
+        bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd));
+      
+      if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
+    
+      if (!command)
+        return;
+    
+       if (command) {
+         command.run(bot, message, args, ops);
+       } else {
+         command.run(bot, message, args)
+       }
+       
 })
 
 

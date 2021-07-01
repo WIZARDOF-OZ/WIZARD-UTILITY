@@ -27,7 +27,7 @@ execute: async (client, message, args) => {
         try {
             let fetched = await db.fetch(`prefix_${message.guild.id}`);
             if (fetched == null) {
-                PREFIX = PREFIX
+                PREFIX = prefix
             } 
         } catch (e) {
             console.log(e)

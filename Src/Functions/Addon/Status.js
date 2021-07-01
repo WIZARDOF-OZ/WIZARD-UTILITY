@@ -17,7 +17,7 @@ function loadStatus(client) {
         {
             "status": "idle",
             "activity": {
-                "name": "TO MY DEV:Dev:WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ#4090 ",
+                "name": "TO MY DEV:WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ#4090 ",
                 "type": "LISTENING"
             }
         },
