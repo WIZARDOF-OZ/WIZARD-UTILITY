@@ -7,7 +7,7 @@ module.exports = {
     execute: (Client, message, args) => {
         const embed = new Discord.MessageEmbed()
 
-        .setTitle(`Important`)
+        .setTitle(`Embed`)
         .setColor(`RANDOM`)
         .setThumbnail(message.guild.iconURL({dynamic:true}))
         .setDescription(message.content.substring(7))

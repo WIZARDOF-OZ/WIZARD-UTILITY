@@ -197,23 +197,38 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 queue3: bot.queue3,
                 games: bot.games
             }
-    
-      let command =
-        bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd));
+
       
       if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
     
-      if (!command)
-        return;
-    
-       if (command) {
-         command.run(bot, message, args, ops);
-       } else {
-         command.run(bot, message, args)
-       }
+      
        
 })
 
+client.on('messageReactionAdd', async(reaction, user) => {
+  if(reaction.message.partial) await reaction.message.fetch();
+  if(reaction.partial) await reaction.fetch();
+  if(user.bot) return;
+  if(!reaction.message.guild) return;
+  if(reaction.message.id === '860068586016997376'){
+      if(reaction.emoji.name === '🎫' , '<:b_dot:837258379591286804>:') {
+          await reaction.message.guild.members.cache.get(user.id).roles.add('847408202110861312')
+          user.send('You have obtained a role!')
+      }
+  }
+})
+client.on('messageReactionRemove', async(reaction, user) => {
+  if(reaction.message.partial) await reaction.message.fetch();
+  if(reaction.partial) await reaction.fetch();
+  if(user.bot) return;
+  if(!reaction.message.guild) return;
+  if(reaction.message.id === '<messageid>'){
+      if(reaction.emoji.name === '<emoji>') {
+          await reaction.message.guild.members.cache.get(user.id).roles.remove('<roleID>')
+          user.send('One of your roles has been removed!')
+      }
+  }
+})
 
 
 
