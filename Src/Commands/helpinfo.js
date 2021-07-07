@@ -93,6 +93,7 @@ else {
     ** Command -** \`${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}\`\n
     ** Description -** \`${command.description || "No Description provided."}\`\n
     ** Usage -** [   \`${command.usage ? `${command.usage}` : "No Usage"}\`   ]\n
+    ** Category -** [   \`${command.category ? `${command.category}` : "No category found"}\`   ]\n
     ** Examples -** \`${command.example ? `${command.example}` : "No Examples Found"}\`\n
     ** Aliases -** [ \`${command.aliases ? command.aliases.join(" , ") : "None."}\` ]`)
     embed.setFooter(message.guild.name, message.guild.iconURL())

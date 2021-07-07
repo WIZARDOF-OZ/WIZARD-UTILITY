@@ -1,4 +1,5 @@
 const { MessageEmbed, Client } = require("discord.js");
+const { Stats } = require("fs");
 const bot = new Client()
 module.exports = {
 
@@ -9,8 +10,14 @@ module.exports = {
         aliases: ['rinfo', 'rolei'],
 
     execute: async (bot, message, args) => {
+    
+    try{    var permissions = [];
         if (!args[0]) return message.channel.send("**Please Enter A Role!**")
         let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]) || message.guild.roles.cache.find(r => r.name.toLowerCase() === args.join(' ').toLocaleLowerCase());
+
+
+        
+   
         if (!role) return message.channel.send("**Please Enter A Valid Role!**");
 
         const status = {
@@ -20,17 +27,34 @@ module.exports = {
 
         let roleembed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle(`Role Info: \`[  ${role.name}  ]\``)
+          
             .setThumbnail(message.guild.iconURL())
-            .addField("**ID**", `\`${role.id}\``, true)
-            .addField("**Name**", role.name, true)
-            .addField("**Hex**", role.hexColor, true)
-            .addField("**Members**", role.members.size, true)
-            .addField("**Position**", role.position, true)
-            .addField("**Mentionable**", status[role.mentionable], true)
+        
+            .addField("**__General Information__**", [
+                `**Role Name:** ${role}`,
+                `**Id:**  ${role.id}`,
+                `**Hex Color:** ${role.hexColor}`,
+                `**Created At**: ${role.createdAt.toLocaleDateString()}`,
+                `**Members:** ${role.members.size}`,
+                `**Role Position:** ${role.position}`,
+                `**Is the role mentionable?:** ${status[role.mentionable]}`,
+             
+            ])
+            .addField("Permissions",`\`\`\`fix\n${role.permissions.toArray()}\`\`\``, true)
+           
             .setFooter(message.member.displayName, message.author.displayAvatarURL(), true)
             .setTimestamp()
 
-        message.channel.send(roleembed);
+        message.reply(` *Information About* \`${role.name}\``,roleembed);
+    }catch(e)  {
+        console.log(e)
+        message.channel.send(new MessageEmbed()
+        .setColor(`RED`)
+        .setFooter(`ONE ERROR OCCURED AT`)
+        .setTimestamp()
+        .setTitle(`❌ ERROR | An error occurred`)
+        .setDescription(`\`\`\`${e.stack}\`\`\``)
+      );
+    }
     }
 }

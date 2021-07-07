@@ -44,35 +44,36 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
-            .setAuthor(client.user.username, client.user.displayAvatarURL())
-            .setDescription(`Shows the server info for \`${message.guild.name}\``)
+            .setAuthor(message.author.username, message.author.displayAvatarURL({dyanmic : true}))
+            .setDescription(`<a:badge:837259871156961320>Shows the server info for **${message.guild.name}**<a:badge:837259871156961320>`)
+            .setColor("RANDOM")
             .addField('General Info', [
-                `**ID:** ${message.guild.id}`,
-                `**Name:** ${message.guild.name}`,
-                `**Owner:** ${message.guild.owner} (${message.guild.owner.id})`,
+                `<a:shinydot:837258278085066803>**ID:** ${message.guild.id}`,
+                `<a:shinydot:837258278085066803>**Name:** ${message.guild.name}`,
+                `<a:shinydot:837258278085066803>**Owner:** ${message.guild.owner} (${message.guild.owner.id})`,
                 `\u200b`
             ])
             .addField('Boost Info', [
-                `**Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : 'None'}`,
-                `**Boost Count:** ${message.guild.premiumSubscriptionCount || '0'}`,
+                `<a:shinydot:837258278085066803>**Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : 'None'}`,
+                `<a:shinydot:837258278085066803>**Boost Count:** ${message.guild.premiumSubscriptionCount || '0'}`,
                 `\u200b`
             ])
             .addField('Counters', [
-                `**Role Count:** ${roles.length}`,
-                `**Text Channels:** ${channels.filter(channel => channel.type === 'text').size}`,
-                `**Voice Channels:** ${channels.filter(channel => channel.type === 'voice').size}`,
-                `**Bots:** ${members.filter(member => member.user.bot).size}`,
-                `**Humans:** ${members.filter(member => !member.user.bot).size}`,
-                `**Animated Emoji Count:** ${emojis.filter(emoji => emoji.animated).size}`,
-                `**Emoji Count:** ${emojis.size}`,
-                `**Regular Emoji Count:** ${emojis.filter(emoji => !emoji.animated).size}`,
+                `<a:shinydot:837258278085066803>**Role Count:** ${roles.length}`,
+                `<a:shinydot:837258278085066803>**Text Channels:** ${channels.filter(channel => channel.type === 'text').size}`,
+                ` <a:shinydot:837258278085066803>**Voice Channels:** ${channels.filter(channel => channel.type === 'voice').size}`,
+                `<a:shinydot:837258278085066803>**Bots:** ${members.filter(member => member.user.bot).size}`,
+                `<a:shinydot:837258278085066803>**Humans:** ${members.filter(member => !member.user.bot).size}`,
+                `<a:shinydot:837258278085066803>**Animated Emoji Count:** ${emojis.filter(emoji => emoji.animated).size}`,
+                `<a:shinydot:837258278085066803>**Emoji Count:** ${emojis.size}`,
+                `<a:shinydot:837258278085066803>**Regular Emoji Count:** ${emojis.filter(emoji => !emoji.animated).size}`,
                 `\u200b`
             ])
             .addField('Additional Info', [
-                `**Explicit Filter:** ${filterLevels[message.guild.explicitContentFilter]}`,
-                `**Verification Level:**  ${verificationLevels[message.guild.verificationLevel]}`,
-                `**Time Created:** ${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} ${moment(message.guild.createdTimestamp).fromNow()}`,
-                `**Region:** ${regions[message.guild.region]}`,
+                `<a:shinydot:837258278085066803>**Explicit Filter:** ${filterLevels[message.guild.explicitContentFilter]}`,
+                `<a:shinydot:837258278085066803>**Verification Level:**  ${verificationLevels[message.guild.verificationLevel]}`,
+                `<a:shinydot:837258278085066803>**Time Created:** ${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} ${moment(message.guild.createdTimestamp).fromNow()}`,
+                `<a:shinydot:837258278085066803>**Region:** ${regions[message.guild.region]}`,
                 `\u200b`
             ])
             .setTimestamp()
