@@ -17,7 +17,7 @@ const regions = {
     brazil: 'Brazil',
     europe: 'Europe',
     hongkong: 'Hong Kong',
-    india: 'India',
+    india: 'India:flag_in: ',
     japan: 'Japan',
     russia: 'Russia',
     singapore: 'Singapore',
@@ -45,7 +45,7 @@ module.exports = {
         const embed = new MessageEmbed()
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setAuthor(message.author.username, message.author.displayAvatarURL({dyanmic : true}))
-            .setDescription(`<a:badge:837259871156961320>Shows the server info for **${message.guild.name}**<a:badge:837259871156961320>`)
+            .setDescription(`<a:Hypesquad:837258853627461632>ServerInfo of **${message.guild.name}**<a:Hypesquad:837258853627461632>`)
             .setColor("RANDOM")
             .addField('General Info', [
                 `<a:shinydot:837258278085066803>**ID:** ${message.guild.id}`,
@@ -77,7 +77,7 @@ module.exports = {
                 `\u200b`
             ])
             .setTimestamp()
-            .setFooter(`${message.guild.name}`);
+            .setFooter(`${message.guild.name}`,`${message.guild.iconURL({dynamic: true})}`);
         message.channel.send(embed);
     }
 }

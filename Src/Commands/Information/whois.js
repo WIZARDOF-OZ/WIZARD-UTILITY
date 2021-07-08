@@ -101,23 +101,24 @@ try {
 
         const embed = new Discord.MessageEmbed()
             .setDescription(`<@${member.user.id}>`)
+            
             .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL())
-            .setColor('RANDOM')
+            .setColor(member.roles.highest.hexColor)
             .setFooter(`ID: ${message.author.id}`)
             .setThumbnail(member.user.displayAvatarURL({dynamic : true , size: 4096}))
             .setTimestamp()
-            .addField("__Status__",`${status[member.user.presence.status]}`, true)
-            .addField('__Joined at:__ ',`${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
-            .addField('__Created On__', member.user.createdAt.toLocaleString(), true)
-            .addField("Badges: ",`${userFlags.length ? userFlags.map(flag => flags[flag]).join(',') : 'None'}`,true)
-            .addField("is a bot",`${member.user.bot}`)
-            .addField("__Playing__", member.presence.activities[0] ? member.presence.activities[0].state : `User Doesn't have a custom status!`, true)
-           .addField("Nickname", `${nickname}`, true)
-            .addField(`\n__Roles [${member.roles.cache.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]__`,`${member.roles.cache.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "No Roles"}`, true)
-            .addField("\n__Acknowledgements:__ ", `${acknowledgements}`, true)
-            .addField("\n__Permissions:__ ", `${permissions.join(` | `)}`);
+            .addField("<:m_dot2:837258057414475777>__Status__",`${status[member.user.presence.status]}`, true)
+            .addField('<:m_dot2:837258057414475777>__Joined at:__ ',`${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+            .addField('<:m_dot2:837258057414475777>__Created On__', member.user.createdAt.toLocaleString(), true)
+            .addField("<:m_dot2:837258057414475777>__Badges__: ",`${userFlags.length ? userFlags.map(flag => flags[flag]).join(',') : 'None'}`,true)
+            .addField("<:m_dot2:837258057414475777>__Is a bot?__",`${member.user.bot}`)
+            .addField("<:m_dot2:837258057414475777>__Playing__", member.presence.activities[0] ? member.presence.activities[0].state : `User Doesn't have a custom status!`, true)
+           .addField("<:m_dot2:837258057414475777>__Nickname__", `${nickname}`, true)
+            .addField(`\n<:m_dot2:837258057414475777>__Roles [${member.roles.cache.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]__`,`${member.roles.cache.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "No Roles"}`, true)
+            .addField("\n<:m_dot2:837258057414475777>__Acknowledgements:__ ", `${acknowledgements}`, true)
+            .addField("\n<:m_dot2:837258057414475777>__Permissions:__ ", `${permissions.join(` | `)}`);
             
-        message.channel.send({embed})
+        message.channel.send(`<a:redbadge:837717474107326477>UserInfo Of \`\`${member}\`\`<a:redbadge:837717474107326477>`,{embed})
 
     } catch (e) {
         console.log(e)

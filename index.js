@@ -102,7 +102,35 @@ async function load() {
         console.log(chalk.red("MongoDB > Error" + "\n" + err));
     });
 }
+const AntiSpam = require('discord-anti-spam');
+const antiSpam = new AntiSpam({
+ 
+	warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
+	muteThreshold: 4, // Amount of messages sent in a row that will cause a mute
+	kickThreshold: 2, // Amount of messages sent in a row that will cause a kick.
+	banThreshold: 7, // Amount of messages sent in a row that will cause a ban.
+	maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
+	warnMessage: '{@user}, Please stop spamming.', // Message that will be sent in chat upon warning a user.
+	kickMessage: '**{user_tag}** has been kicked for spamming.', // Message that will be sent in chat upon kicking a user.
+	muteMessage: '**{user_tag}** has been muted for spamming.',// Message that will be sent in chat upon muting a user.
+	banMessage: '**{user_tag}** has been banned for spamming.', // Message that will be sent in chat upon banning a user.
+	maxDuplicatesWarning: 6, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesBan: 4, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesMute: 8, // Ammount of duplicate message that trigger a mute.
+	ignoredPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
+	ignoreBots: true, // Ignore bot messages.
+	verbose: true, // Extended Logs from module.
+	ignoredMembers: [], // Array of User IDs that get ignored.
+	muteRoleName: "muted", // Name of the role that will be given to muted users!
+	removeMessages: false,
+  // If the bot should remove all the spam messages when taking action on a user!
+	// And many more options... See the documentation.
+});
 
+
+
+client.on('message', (message) => antiSpam.message(message)); 
 
 
 load();
@@ -133,16 +161,16 @@ client.on("message" , async message => {
          .setFooter(`Requested by ${message.author.username}`)
          .setTimestamp()
 )}
-if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
-    const info = db.get(`afk-${message.author.id}+${message.guild.id}`)
+if(wb.has(`afk-${message.author.id}+${message.guild.id}`)) {
+    const info = wb.get(`afk-${message.author.id}+${message.guild.id}`)
     await db.delete(`afk-${message.author.id}+${message.guild.id}`)
     message.reply(`Your afk status have been removed (${info})`)
 }
 //checking for mentions
 if(message.mentions.members.first()) {
-    if(db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
-      const reason = db.fetch(`afk-${message.mentions.members.first().id}+${message.guild.id}`);
-      let time = db.fetch(`aftime-${message.mentions.members.first().id}+${message.guild.id}`);
+    if(wb.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
+      const reason = wb.fetch(`afk-${message.mentions.members.first().id}+${message.guild.id}`);
+      let time = wb.fetch(`aftime-${message.mentions.members.first().id}+${message.guild.id}`);
             time = Date.now() - time;
        return message.channel.send(`**${message.mentions.members.first().user.username} is now afk - ${reason} - ${format(
                     time

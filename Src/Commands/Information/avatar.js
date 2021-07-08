@@ -26,12 +26,12 @@ user = message. author;
 let target =  message.mentions.members.first() || message.member;
 if(!target) return message.author;
 
-let avatar = user.displayAvatarURL ({size: 4096, dynamic: true});
+let avatar = user.displayAvatarURL ({size: 4096, dynamic: true, format:"png"});
 
 const embed = new Discord.MessageEmbed()
 
 .setTitle(`${user.tag} avatar`)
-.setDescription(`[Avatar URL of ${user.tag}](${avatar})`) 
+.setDescription(`[Download the avatar](${avatar})`) 
 .setColor(target.roles.highest.hexColor)
 .setImage(avatar);
 

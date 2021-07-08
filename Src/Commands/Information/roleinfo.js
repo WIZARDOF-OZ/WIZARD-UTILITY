@@ -29,17 +29,15 @@ module.exports = {
             .setColor(`RANDOM`)
           
             .setThumbnail(message.guild.iconURL())
-        
-            .addField("**__General Information__**", [
-                `**Role Name:** ${role}`,
-                `**Id:**  ${role.id}`,
-                `**Hex Color:** ${role.hexColor}`,
-                `**Created At**: ${role.createdAt.toLocaleDateString()}`,
-                `**Members:** ${role.members.size}`,
-                `**Role Position:** ${role.position}`,
-                `**Is the role mentionable?:** ${status[role.mentionable]}`,
-             
-            ])
+        .setDescription(`**__General Information__**
+            **Role Name:** ${role},
+            **Id:**  ${role.id},
+            **Hex Color:** ${role.hexColor},
+            **Created At**: ${role.createdAt.toLocaleDateString()},
+            **Members:** ${role.members.size},
+            **Role Position:** ${role.position},
+            **Is the role mentionable?:** ${status[role.mentionable]}`)
+            
             .addField("Permissions",`\`\`\`fix\n${role.permissions.toArray()}\`\`\``, true)
            
             .setFooter(message.member.displayName, message.author.displayAvatarURL(), true)

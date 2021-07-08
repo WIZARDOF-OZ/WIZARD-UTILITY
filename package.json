@@ -31,6 +31,7 @@
     "color-luminance": "^2.1.0",
     "colornames": "^1.1.1",
     "common-tags": "^1.8.0",
+    "discord-anti-spam": "^2.5.1",
     "discord-giveaway": "^1.1.4",
     "discord-image-generation": "^1.4.9",
     "discord-inv": "^1.1.0",
