@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Client = new Discord.Client();
 
-const config = require("../../../JSON/emojiDelete_Config.json");
+const config = require("../../../JSON/emojiCreate_Config.json");
 
 const fetch = require("node-fetch");
 
