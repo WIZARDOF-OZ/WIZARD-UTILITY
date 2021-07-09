@@ -1,12 +1,14 @@
 const db = require("old-wio.db");
 const {MessageEmbed, Message, Client} = require('discord.js');
 const Discord = require("discord.js");
+const config = require("../../../config.js")
 const { version: discordjsVersion} = require('discord.js')
 const moment = require("moment");
 const ms = require("pretty-ms");
 const package = require("../../../package.json");
 const fetch = require("node-fetch");
-const { version } = require("../../../package.json")
+const { version } = require("../../../package.json");
+const { re } = require("mathjs");
 
 
 module.exports = {
@@ -22,11 +24,11 @@ module.exports = {
 
 
     execute: async(client, message, args, text, instance) => {
-
+const mongoApi = await latency(config.mongoDB)
         const generalAPI = await latency(`https://tke-general.screeneros.repl.co/`);
         const GeneralStatus = [
             `Dependencies: ${Object.keys(package.dependencies).length}`,
-            `MongoDB [Database]: <:online:846303129418465350>`,
+            `MongoDB [Database]: ${mongoApi ? `<:online:846303129418465350>` : "<:offline:846311028177895444>"}`,
             `Wizard's UtitliyGeneral APIs: ${generalAPI.status ? `<:online:846303129418465350>` : "<:offline:846311028177895444>"}`,
             
            
