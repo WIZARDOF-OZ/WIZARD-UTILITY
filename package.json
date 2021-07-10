@@ -85,6 +85,6 @@
     "transliteration": "^2.2.0",
     "weather-js": "^2.0.0",
     "wikipedia": "^1.1.1",
-    "ytdl-core": "github:distubejs/node-ytdl-core"
+    "ytdl-core": "^4.8.3"
   }
 }
