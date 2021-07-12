@@ -36,7 +36,7 @@ module.exports = {
     memberPermissions: [],
     category: "Information",
     execute: async (client, message, args, text, instance) => {
-
+const guild = message.guild
         const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
         const members = message.guild.members.cache;
         const channels = message.guild.channels.cache;
@@ -74,7 +74,28 @@ module.exports = {
                 `<a:shinydot:837258278085066803>**Verification Level:**  ${verificationLevels[message.guild.verificationLevel]}`,
                 `<a:shinydot:837258278085066803>**Time Created:** ${moment(message.guild.createdTimestamp).format('LT')} ${moment(message.guild.createdTimestamp).format('LL')} ${moment(message.guild.createdTimestamp).fromNow()}`,
                 `<a:shinydot:837258278085066803>**Region:** ${regions[message.guild.region]}`,
-                `\u200b`
+                `\u200b`,
+               `**<a:shinydot:837258278085066803>VanityURL:** ${guild.vanityURLCode || "No Vanity URL"}
+                **<a:shinydot:837258278085066803>Online ** ${
+                        guild.members.cache.filter(
+                          (members) => members.presence.status === "online"
+                        ).size
+                      }
+                **<a:shinydot:837258278085066803>Idle** ${
+                        guild.members.cache.filter(
+                          (members) => members.presence.status === "idle"
+                        ).size
+                      }
+                **<a:shinydot:837258278085066803>DnD** ${
+                        guild.members.cache.filter(
+                          (members) => members.presence.status === "dnd"
+                        ).size
+                      }
+                **<a:shinydot:837258278085066803>Offline** ${
+                        guild.members.cache.filter(
+                          (members) => members.presence.status === "offline"
+                        ).size
+                      }`
             ])
             .setTimestamp()
             .setFooter(`${message.guild.name}`,`${message.guild.iconURL({dynamic: true})}`);
