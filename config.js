@@ -4,6 +4,7 @@ module.exports = {
     prefix: "-",
     version: "2.0.4",
     lastUpdated: "2021-05-06T17:31:38.390Z",
+    youtubeCookie: process.env.youtubeCookie,
     commandDir: "./Src/Commands",
     featuresDir: "./Src/Features",
     functionDir: "./Src/Features",
