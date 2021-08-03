@@ -52,9 +52,9 @@ const mongoApi = await latency(config.mongoDB)
         .addField('❯ Node:', `${process.version} on ${process.platform} ${process.arch}`, true)
         .addField('❯ Cached Data:', `${client.users.cache.size} users\n${client.emojis.cache.size} emojis`, true)
         .addField('❯ Discord.js:', `${discordjsVersion}`, true)
-        .addField('❯ Api Status ', btf(GeneralStatus))
+        .addField('❯ Other ', btf(GeneralStatus))
 
-        .setFooter(`Coded with 🍵 by ${WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ.tag}`, WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ.displayAvatarURL({ dynamic: true }))
+        .setFooter(`Coded  by ${WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ.tag}`, WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
 
         message.channel.send(botinfo)
