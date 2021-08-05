@@ -140,7 +140,11 @@ if (config.dev.debug) {
     createTable(client.commands)
 }
 
-client.on("ready" , () => {
+client.on("ready" , async() => {
+
+    const channel = await client.channels.cache.get('842287740233711648')
+    channel.send("<@583666642010112000> I am Online" )
+
     console.log(chalk.red(`${client.user.tag} is ready`))
 })
 client.on("message" , async message => {
