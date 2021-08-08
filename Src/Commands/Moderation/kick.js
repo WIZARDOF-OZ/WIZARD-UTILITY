@@ -71,7 +71,7 @@ module.exports = {
 				message.channel.send(sembed2);
 			}
 			client.modlogs({
-				Member: member,
+				Member: kickMember,
 				Action: 'Kick',
 				Color: "RED",
 				Reason: reason

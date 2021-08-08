@@ -24,5 +24,13 @@ module.exports = {
         } catch (e) {
             channel.send(new MessageEmbed().setColor(instance.color.error).setDescription(`${instance.emoji.error} I cannot change nickname of that member.`));
         }
+        client.modlogs({
+            Member: decancer,
+            Action: 'Nickname',
+           
+            Color: "RED",
+           
+        }, message
+        );
     }
 }
