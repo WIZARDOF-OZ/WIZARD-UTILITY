@@ -15,6 +15,7 @@ console.log(chalk.cyan(`Your app is listening a http://localhost:${port}`))
 require("dotenv").config();
 
     const DiscordJS = require("discord.js"),
+    { MessageEmbed } = require("discord.js"),
     mongoose = require("mongoose"),
     DisTube = require('distube');
     getFiles = require("./Src/Functions/Base/getFiles"),
@@ -49,12 +50,26 @@ const config = require("./config.js");
 const wb = require("quick.db")
 const  db = require("old-wio.db");
 const fs = require("fs");
+const modlogsSchema =  require("./Src/Database/Schemas/modlog");
 const Enmap = require("enmap");
 client.queue2 = new Map();
 client.queue3 = new Map();
 client.queue = new Map();
 client.games = new Map();
+client.modlogs = async function({ Member, Action, Color, Reason}, message) {
+     const data = await modlogsSchema.findOne({ Guild: message.guild.id });
+     if(!data) return;
 
+      const channel = message.guild.channels.cache.get(data.Channel);
+
+      const logsEmbed =  new MessageEmbed()
+      .setColor(Color)
+      .setDescription(`Reason: ${Reason} || 'No Reason Provided`)
+      .addField('Member',`${Member.user.tag} (${Member.id})`)
+      .setTitle(`Action Took: ${Action}`)
+
+      channel.send(logsEmbed)
+};
   
 
 client.commands = new DiscordJS.Collection();
@@ -103,6 +118,7 @@ async function load() {
     });
 }
 const AntiSpam = require('discord-anti-spam');
+const { modlogs } = require('./Src/Database');
 const antiSpam = new AntiSpam({
  
 	warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.

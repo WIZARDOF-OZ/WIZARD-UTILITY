@@ -70,24 +70,13 @@ module.exports = {
 					.setDescription(`**${kickMember.user.username}** has been kicked`);
 				message.channel.send(sembed2);
 			}
-			let channel = db.fetch(`modlog_${message.guild.id}`);
-			if (!channel) return;
-
-			const embed = new MessageEmbed()
-				.setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
-				.setColor('#ff0000')
-				.setThumbnail(kickMember.user.displayAvatarURL({ dynamic: true }))
-				.setFooter(message.guild.name, message.guild.iconURL())
-				.addField('**Moderation**', 'kick')
-				.addField('**User Kicked**', kickMember.user.username)
-				.addField('**Kicked By**', message.author.username)
-				.addField('**Reason**', `${reason || '**No Reason**'}`)
-				.addField('**Date**', message.createdAt.toLocaleString())
-				.setTimestamp();
-
-			var sChannel = message.guild.channels.cache.get(channel);
-			if (!sChannel) return;
-			sChannel.send(embed);
+			client.modlogs({
+				Member: member,
+				Action: 'Kick',
+				Color: "RED",
+				Reason: reason
+			}, message
+			);
 		} catch (e) {
 			return message.channel.send(`**${e.message}**`);
 		}
