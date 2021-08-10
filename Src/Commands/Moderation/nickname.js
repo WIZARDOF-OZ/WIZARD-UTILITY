@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { transliterate: tr } = require("transliteration");
-
+const db = require("old-wio.db")
 module.exports = {
     name: "nickname",
     aliases: ['nick', 'nk'],
@@ -24,13 +24,25 @@ module.exports = {
         } catch (e) {
             channel.send(new MessageEmbed().setColor(instance.color.error).setDescription(`${instance.emoji.error} I cannot change nickname of that member.`));
         }
-        client.modlogs({
-            Member: decancer,
-            Action: 'Nickname',
-           
-            Color: "RED",
-           
-        }, message
-        );
+      
+        let modchannel = db.fetch(`modlog_${message.guild.id}`)
+        if (!modchannel) return;
+
+        const sembed = new MessageEmbed()
+            .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+            .setColor("#ff0000")
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+            .setFooter(message.guild.name, message.guild.iconURL())
+            .addField("**Moderation**", "setnick")
+            .addField("**Nick Changed Of**", target)
+            .addField("**Nick Changed By**", message.author.username)
+            .addField("**Nick Changed To**", decancer)
+            
+            .addField("**Date**", message.createdAt.toLocaleString())
+            .setTimestamp();
+
+            var sChannel = message.guild.channels.cache.get(modchannel)
+            if (!sChannel) return;
+            sChannel.send(sembed)
     }
 }
