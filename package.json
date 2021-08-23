@@ -10,12 +10,8 @@
   },
   "devDependencies": {
     "normalize-url": ">=4.5.1",
-    "ws": ">=7.4.6",
-    "set-getter": ">=0.1.1"
-  },
-  "engines": {
-    "node": "12.x",
-    "npm": "*"
+    "set-getter": ">=0.1.1",
+    "ws": ">=7.4.6"
   },
   "repository": {
     "type": "git",
@@ -85,6 +81,6 @@
     "transliteration": "^2.2.0",
     "weather-js": "^2.0.0",
     "wikipedia": "^1.1.1",
-    "ytdl-core": "^4.9.0"
+    "ytdl-core": "^4.9.1"
   }
 }

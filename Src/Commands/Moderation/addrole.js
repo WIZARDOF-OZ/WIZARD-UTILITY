@@ -72,7 +72,7 @@ module.exports = {
    
        default:
         
-  const bandelog = message.mentions.members || message.guild.user.cache.get(args[1]);;
+  const bandelog = message.mentions.members || message.guild.user.cache.get(args[3]);
   if(!bandelog) return message.reply(`No Users Mentioned !`)
   const msg1 = message.channel.send(`Adding Role \`${role.name}\` To \`${bandelog.size}\` Members \n Users => ${args.slice(1)}`); 
   await bandelog.forEach(n=>n.roles.add(role,`Responsible Moderator : ${message.author.tag}`))

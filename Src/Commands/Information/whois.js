@@ -111,7 +111,7 @@ try {
             .addField('<:m_dot2:837258057414475777>__Joined at:__ ',`${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
             .addField('<:m_dot2:837258057414475777>__Created On__', member.user.createdAt.toLocaleString(), true)
             .addField("<:m_dot2:837258057414475777>__Badges__: ",`${userFlags.length ? userFlags.map(flag => flags[flag]).join(',') : 'None'}`,true)
-            .addField("<:m_dot2:837258057414475777>__Is a bot?__",`${member.user.bot}`)
+            .addField("<:m_dot2:837258057414475777>__Is a bot?__",`${status[member.user.bot]}`, true)
             .addField("<:m_dot2:837258057414475777>__Playing__", member.presence.activities[0] ? member.presence.activities[0].state : `User Doesn't have a custom status!`, true)
            .addField("<:m_dot2:837258057414475777>__Nickname__", `${nickname}`, true)
             .addField(`\n<:m_dot2:837258057414475777>__Roles [${member.roles.cache.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]__`,`${member.roles.cache.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "No Roles"}`, true)
