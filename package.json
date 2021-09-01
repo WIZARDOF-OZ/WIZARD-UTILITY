@@ -4,7 +4,7 @@
   "description": "this is my real bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node index.js",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
@@ -21,10 +21,12 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
+    "@sourcebin/linguist": "^0.0.3",
     "@vitalets/google-translate-api": "^7.0.0",
     "amethyste-api": "^1.1.5",
     "axios": "^0.21.1",
-    "canvacord": "^5.2.1",
+    "canvacord": "^5.2.3",
+    "canvas": "github:WIZARDOF-OZ/node-canvas",
     "chalk": "^4.1.1",
     "chartjs-to-image": "^1.0.4",
     "color-convert": "^2.0.1",

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('../../../config.js');
-const canvacord = require('canvacord');
+//const canvacord = require('canvacord');
 
 module.exports = {
   
@@ -11,7 +11,7 @@ module.exports = {
         category: 'Fun',
     
     execute: async (client, message, args,text, instance) => {
-        const errEmbed = new Discord.MessageEmbed()
+   /*    const errEmbed = new Discord.MessageEmbed()
         .setColor(instance.color.error)
         const comment = args.join('');
         if(!comment) return message.channel.send(errEmbed.setDescription(`${instance.emoji.error} Provide something to Comment!`))
@@ -26,7 +26,8 @@ module.exports = {
     .setTitle(errEmbed2.setDescription(`${instance.color.error} Something went wrong.\n${instance.emoji.error}Note : It won't work if the User contains Unwanted characters in his Username.`))
     
     message.channel.send(embed2);
+    
     }
-
+*/
     }
 };

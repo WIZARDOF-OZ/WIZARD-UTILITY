@@ -5,7 +5,8 @@ module.exports = {
     permissions: ['MANAGE_MESSAGES'], // You Can Keep Any Permission
     permissionError: 'You Cant Use This Command', // Optional
     description: 'Creates An Embed For You With Out Code', // Optional
-    usage: '+embed #Channel-Name ^Title^Description^Footer^Color^Thumbnail^Link^Image-Link', // Optional
+    category:"Moderation",
+        usage: '+embed #Channel-Name ^Title^Description^Footer^Color^Thumbnail^Link^Image-Link', // Optional
 
     execute: (client,message, args, text) => {
 try{

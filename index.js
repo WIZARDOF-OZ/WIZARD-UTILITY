@@ -125,10 +125,11 @@ const antiSpam = new AntiSpam({
 	muteRoleName: "muted", // Name of the role that will be given to muted users!
 	removeMessages: false,
   // If the bot should remove all the spam messages when taking action on a user!
-	// And many more options... See the documentation.
+	// And many more options... See the documentation.m
+  
 });
 
-
+client.setMaxListeners(50) 
 
 
 client.on('message', (message) => antiSpam.message(message)); 

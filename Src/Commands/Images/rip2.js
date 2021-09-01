@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = {
 
-        name: 'rip',
+        name: 'rip2',
         description: 'RIP!',
         aliases: ["rip"],
         usage: '',

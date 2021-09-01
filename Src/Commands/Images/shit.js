@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const canvacord = require("canvacord");
+//const canvacord = require("canvacord");
 
 module.exports = {
     name: "shit",
