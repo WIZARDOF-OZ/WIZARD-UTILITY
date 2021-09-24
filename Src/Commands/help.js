@@ -23,12 +23,12 @@ try{
         const WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ = await client.users.cache.get("583666642010112000");
         let commands = message.client.commands.array();
 
-        const { author, channel } = message;
+        const { author, channel , guild} = message;
         let category = await client.commands.map(x => x.category);
        
         const Description = `My Prefix For **${message.guild.name}** Is **${prefix}**\n\nFor More Command Information, Type The Following Command:\n**${prefix}help <command Name> or** <@${client.user.id}> **help <command name>**` 
         let embed = new MessageEmbed()
-            .setAuthor(message.author.displayAvatarURL({dynamic: true}))
+            .setAuthor(guild.iconURL({dynamic: true}))
             .setDescription(Description)
             .setFooter(`Coded with 🍵 by ${WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ.tag}`, WIZARDOFOZᶫᵒᵛᵉᵧₒᵤ.displayAvatarURL({ dynamic: true }))
             .setTimestamp()

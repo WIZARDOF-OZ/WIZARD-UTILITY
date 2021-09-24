@@ -47,7 +47,6 @@ const client = new DiscordJS.Client({
 const { format } = require("./function.js")
 const { PREFIX , prefix } = require("./config.js")
 const config = require("./config.js");
-const wb = require("quick.db")
 const  db = require("old-wio.db");
 const fs = require("fs");
 client.queue2 = new Map();
@@ -167,22 +166,6 @@ client.on("message" , async message => {
          .setFooter(`Requested by ${message.author.username}`)
          .setTimestamp()
 )}
-if(wb.has(`afk-${message.author.id}+${message.guild.id}`)) {
-    const info = wb.get(`afk-${message.author.id}+${message.guild.id}`)
-    await db.delete(`afk-${message.author.id}+${message.guild.id}`)
-    message.reply(`Your afk status have been removed (${info})`)
-}
-//checking for mentions
-if(message.mentions.members.first()) {
-    if(wb.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
-      const reason = wb.fetch(`afk-${message.mentions.members.first().id}+${message.guild.id}`);
-      let time = wb.fetch(`aftime-${message.mentions.members.first().id}+${message.guild.id}`);
-            time = Date.now() - time;
-       return message.channel.send(`**${message.mentions.members.first().user.username} is now afk - ${reason} - ${format(
-                    time
-                )} ago**`);
-    }
-}
 
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
@@ -207,7 +190,7 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       
       if (cmd.length === 0) return;
     
-      let cmdx = wb.fetch(`cmd_${message.guild.id}`)
+      let cmdx = db.fetch(`cmd_${message.guild.id}`)
     
       if (cmdx) {
         let cmdy = cmdx.find(x => x.name === cmd)

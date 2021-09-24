@@ -4,7 +4,7 @@ const bot = new Client()
 module.exports = {
 
         name: "setmodlogchannel",
-        category: "admin",
+        category: "Admin",
         aliases: ['setm', 'sm', 'smc', 'setmodlog'],
         description: "Sets A Channel Where The Bot Can Send Moderation Logs!",
         usage: "[channel mention | channel ID | channel name]",
